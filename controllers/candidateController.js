@@ -85,5 +85,19 @@ const DelCandidate=asyncHandler(async(req,res)=>{
     res.status(200).json(candidate);
 });
 
+//@desc get a candidate
+//@route Get/api/candidate/:id 
+//@access public
 
-module.exports={getCandidates,getCandidate,CreateCandidate,UpdateCandidate,DelCandidate};
+const VoteForCandidate=asyncHandler(async(req,res)=>{
+    const candidate=await Candidate.findById(req.params.id);
+    if(!candidate){
+        res.status(404);
+        throw new Error("CANDIDATE NOT FOUND");
+    }
+    candidate.VotingPoint++;
+    await candidate.save();  // Save the updated candidate object to the database
+    res.status(200).json(candidate);
+});
+
+module.exports={getCandidates,getCandidate,CreateCandidate,UpdateCandidate,DelCandidate,VoteForCandidate};

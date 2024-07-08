@@ -1,5 +1,6 @@
 const express=require("express");
 const { RegisterUser, LogInUser, CurrentUser } = require("../controllers/userController");
+const ValidateToken = require("../middlewares/ValidateTokenHandler");
 
 
 const router=express.Router();
@@ -12,7 +13,7 @@ router.post("/login",LogInUser);
 
 
 
-router.get("/current",CurrentUser );
+router.get("/current", ValidateToken, CurrentUser );
 
 
 module.exports=router;

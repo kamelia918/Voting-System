@@ -4,10 +4,12 @@ const candidateSchema=mongoose.Schema({
     name:{
         type:String,
         require:[true],
+        unique:[true,"candidate name already used"],
     },
     age:{
         type:Number,
         require:[true],
+        
     },
     VotingPoint:{
         type:Number,
